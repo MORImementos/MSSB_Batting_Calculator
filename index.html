@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    
     <script type="module" src="./data/constants.js"></script>
     <script type="module" src="./helpers/helpers.js"></script>
     <script type="module" src="./helpers/math/helpers.js"></script>
@@ -18,7 +19,40 @@
         <div class="header">
             <!-- <button>Dark Mode</button> -->
         </div>
+
+
         <div class="input">
+            <button onclick="toggleStatFileMode(this)">Stat File Mode</button>
+
+            <section id="statFileInput" hidden="hidden" style="margin-left:30px;">
+                <br>
+                <label for="selectFiles">Select a decoded stat file, and then press Import.</label><br>
+                <input type="file" id="selectFiles" value="Import" /><br>
+                <button id="import">Import</button>
+                <textarea id="result"></textarea><br /><br>
+            
+                <label for="eventNum">Event Number</label>
+                <input id="eventNum" name="eventNum" type="text" value="0"/><br><br>
+                
+                <input id="useStatFileValues" type="submit" value="Fill Form With Stat File Values"/><br>
+                <div id="noContactWarning" hidden="hidden">The chosen event doesn't show a hit</div>
+            
+            </section>
+            
+            <script>
+                let toggleStatFileMode = button => {
+                  let element = document.getElementById("statFileInput");
+                  let hidden = element.getAttribute("hidden");
+              
+                  if (hidden) {
+                     element.removeAttribute("hidden");
+                     button.innerText = "Turn off stat file mode";
+                  } else {
+                     element.setAttribute("hidden", "hidden");
+                     button.innerText = "Turn on stat file mode";
+                  }
+                }
+              </script> <br><br>
     <label for="batterID" title="Batter whose stats are used in the calculations">Batter</label>
     <select id="batterID" name="batterID">
         <option value="0">(0) Mario</option>

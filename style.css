@@ -10,8 +10,9 @@ body {
 }
 
 .container {
-    /* height: 100vh; */
+    /* height: 100vh;  */
     display: flex;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
 
@@ -40,4 +41,14 @@ img {
 
 #contactOutput {
     font-weight: normal;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.output {
+    display: flex;
+    /* flex-direction: column; */
 }
