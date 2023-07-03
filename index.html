@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="module" src="./data/constants.js"></script>
+    <script type="module" src="./helpers/helpers.js"></script>
+    <script type="module" src="./helpers/math/helpers.js"></script>
+
+    <script type="module" defer src="index.js"></script>
+
+    <meta charset="utf-8">
+    <title>Batting Calculation</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- <button>Dark Mode</button> -->
+        </div>
+        <div class="input">
+    <label for="batterID" title="Batter whose stats are used in the calculations">Batter</label>
+    <select id="batterID" name="batterID">
+        <option value="0">(0) Mario</option>
+        <option value="1">(1) Luigi</option>
+        <option value="2">(2) DK</option>
+        <option value="3">(3) Diddy</option>
+        <option value="4">(4) Peach</option>
+        <option value="5">(5) Daisy</option>
+        <option value="6">(6) Yoshi</option>
+        <option value="7">(7) Baby Mario</option>
+        <option value="8">(8) Baby Luigi</option>
+        <option value="9">(9) Bowser</option>
+        <option value="10">(10) Wario</option>
+        <option value="11">(11) Waluigi</option>
+        <option value="12">(12) Koopa(R)</option>
+        <option value="13">(13) Toad(R)</option>
+        <option value="14">(14) Boo</option>
+        <option value="15">(15) Toadette</option>
+        <option value="16">(16) Shy Guy(R)</option>
+        <option value="17">(17) Birdo</option>
+        <option value="18">(18) Monty</option>
+        <option value="19">(19) Bowser Jr</option>
+        <option value="20">(20) Paratroopa(R)</option>
+        <option value="21">(21) Pianta(B)</option>
+        <option value="22">(22) Pianta(R)</option>
+        <option value="23">(23) Pianta(Y)</option>
+        <option value="24">(24) Noki(B)</option>
+        <option value="25">(25) Noki(R)</option>
+        <option value="26">(26) Noki(G)</option>
+        <option value="27">(27) Bro(H)</option>
+        <option value="28">(28) Toadsworth</option>
+        <option value="29">(29) Toad(B)</option>
+        <option value="30">(30) Toad(Y)</option>
+        <option value="31">(31) Toad(G)</option>
+        <option value="32">(32) Toad(P)</option>
+        <option value="33">(33) Magikoopa(B)</option>
+        <option value="34">(34) Magikoopa(R)</option>
+        <option value="35">(35) Magikoopa(G)</option>
+        <option value="36">(36) Magikoopa(Y)</option>
+        <option value="37">(37) King Boo</option>
+        <option value="38">(38) Petey</option>
+        <option value="39">(39) Dixie</option>
+        <option value="40">(40) Goomba</option>
+        <option value="41">(41) Paragoomba</option>
+        <option value="42">(42) Koopa(G)</option>
+        <option value="43">(43) Paratroopa(G)</option>
+        <option value="44">(44) Shy Guy(B)</option>
+        <option value="45">(45) Shy Guy(Y)</option>
+        <option value="46">(46) Shy Guy(G)</option>
+        <option value="47">(47) Shy Guy(Bk)</option>
+        <option value="48">(48) Dry Bones(Gy)</option>
+        <option value="49">(49) Dry Bones(G)</option>
+        <option value="50">(50) Dry Bones(R)</option>
+        <option value="51">(51) Dry Bones(B)</option>
+        <option value="52">(52) Bro(F)</option>
+        <option value="53">(53) Bro(B)</option>
+    </select><!--label>(short) 80890972</label-->
+
+    <label for="batterSuperstar" title="Adds 50 to batting power">Superstar?</label>
+    <input id="batterSuperstar" name="batterSuperstar" type="checkbox" /><br><br>
+
+    <section id="batterOverride" hidden="hidden" style="margin-left:30px;">
+
+        <label for="slapContactSize">Slap Contact Size</label>
+        <input id="slapContactSize" name="slapContactSize" placeholder="Optional" type="text"/><br><br>
+
+        <label for="chargeContactSize">Charge Contact Size</label>
+        <input id="chargeContactSize" name="chargeContactSize" placeholder="Optional" type="text"/><br><br>
+
+        <label for="slapPowerOverride">Slap Power</label>
+        <input id="slapPowerOverride" name="slapPowerOverride" placeholder="Optional" type="text"/><br><br>
+        
+        <label for="chargePowerOverride">Charge Power</label>
+        <input id="chargePowerOverride" name="chargePowerOverride" placeholder="Optional" type="text"/><br><br>
+    <!----
+        <label for="captainStarType">Captain Star Hit</label>
+        <select id="captainStarType" name="captainStarType">
+            <option value="-1">No override</option>
+            <option value="1">Fireball</option>
+            <option value="2">Green Fireball</option>
+            <option value="3">Phony Ball</option>
+            <option value="4">Liar Ball</option>
+            <option value="5">Banana Ball</option>
+            <option value="6">Boomerang Ball</option>
+            <option value="7">Killer Ball</option>
+            <option value="8">Killer Jr. Ball</option>
+            <option value="9">Egg Ball</option>
+            <option value="10">Weird Ball</option>
+            <option value="11">Heart Ball</option>
+            <option value="12">Flower Ball</option>
+        </select><br><br>
+
+            <label for="nonCaptainStarType">Non-Captain Star Hit</label>
+            <select id="nonCaptainStarType" name="nonCaptainStarType">
+                <option value="-1">No override</option>
+                <option value="1">Pop Fly</option>
+                <option value="2">Grounder</option>
+                <option value="3">Line Drive</option>
+            </select><br><br> -->
+
+            <label for="horizHitTraj">Horizontal Hit Trajectory</label>
+            <select id="horizHitTraj" name="horizHitTraj">
+                <option value="-1">No override</option>
+                <option value="0">Mid</option>
+                <option value="1">Pull</option>
+                <option value="2">Push</option>
+            </select><br><br>
+
+            <label for="vertHitTraj">Vertical Hit Trajectory</label>
+            <select id="vertHitTraj" name="vertHitTraj">
+                <option value="-1">No override</option>
+                <option value="0">Mid</option>
+                <option value="1">High</option>
+                <option value="2">Low</option>
+            </select><br><br>
+
+            <label for="superCurve">Hit Curve Type</label>
+            <select id="superCurve" name="superCurve">
+                <option value="-1">No override</option>
+                <option value="0">Normal</option>
+                <option value="1">Super Curve</option>
+            </select><br><br>
+
+    </section>
+    <br />
+    <button onclick="toggle(this)">Show Batter Override</button>
+    
+    <!-- to toggle batter override options-->
+    <script>
+        let toggle = button => {
+        let element = document.getElementById("batterOverride");
+        let hidden = element.getAttribute("hidden");
+    
+        if (hidden) {
+            element.removeAttribute("hidden");
+            button.innerText = "Hide Batter Override";
+        } else {
+            element.setAttribute("hidden", "hidden");
+            button.innerText = "Show Batter Override";
+        }
+        }
+    </script> <br><br>
+
+    <label for="pitcherID" title="Pitcher whose stats are used in the calculations">Pitcher</label>
+    <select id="pitcherID" name="pitcherID">
+        <option value="0">(0) Mario</option>
+        <option value="1">(1) Luigi</option>
+        <option value="2">(2) DK</option>
+        <option value="3">(3) Diddy</option>
+        <option value="4">(4) Peach</option>
+        <option value="5">(5) Daisy</option>
+        <option value="6">(6) Yoshi</option>
+        <option value="7">(7) Baby Mario</option>
+        <option value="8">(8) Baby Luigi</option>
+        <option value="9">(9) Bowser</option>
+        <option value="10">(10) Wario</option>
+        <option value="11">(11) Waluigi</option>
+        <option value="12">(12) Koopa(R)</option>
+        <option value="13">(13) Toad(R)</option>
+        <option value="14">(14) Boo</option>
+        <option value="15">(15) Toadette</option>
+        <option value="16">(16) Shy Guy(R)</option>
+        <option value="17">(17) Birdo</option>
+        <option value="18">(18) Monty</option>
+        <option value="19">(19) Bowser Jr</option>
+        <option value="20">(20) Paratroopa(R)</option>
+        <option value="21">(21) Pianta(B)</option>
+        <option value="22">(22) Pianta(R)</option>
+        <option value="23">(23) Pianta(Y)</option>
+        <option value="24">(24) Noki(B)</option>
+        <option value="25">(25) Noki(R)</option>
+        <option value="26">(26) Noki(G)</option>
+        <option value="27">(27) Bro(H)</option>
+        <option value="28">(28) Toadsworth</option>
+        <option value="29">(29) Toad(B)</option>
+        <option value="30">(30) Toad(Y)</option>
+        <option value="31">(31) Toad(G)</option>
+        <option value="32">(32) Toad(P)</option>
+        <option value="33">(33) Magikoopa(B)</option>
+        <option value="34">(34) Magikoopa(R)</option>
+        <option value="35">(35) Magikoopa(G)</option>
+        <option value="36">(36) Magikoopa(Y)</option>
+        <option value="37">(37) King Boo</option>
+        <option value="38">(38) Petey</option>
+        <option value="39">(39) Dixie</option>
+        <option value="40">(40) Goomba</option>
+        <option value="41">(41) Paragoomba</option>
+        <option value="42">(42) Koopa(G)</option>
+        <option value="43">(43) Paratroopa(G)</option>
+        <option value="44">(44) Shy Guy(B)</option>
+        <option value="45">(45) Shy Guy(Y)</option>
+        <option value="46">(46) Shy Guy(G)</option>
+        <option value="47">(47) Shy Guy(Bk)</option>
+        <option value="48">(48) Dry Bones(Gy)</option>
+        <option value="49">(49) Dry Bones(G)</option>
+        <option value="50">(50) Dry Bones(R)</option>
+        <option value="51">(51) Dry Bones(B)</option>
+        <option value="52">(52) Bro(F)</option>
+        <option value="53">(53) Bro(B)</option>
+    </select><!--label>(short) 80890ada</label-->
+
+    <label for="pitcherSuperstar" title="Adds 50 to the cursed ball stat">Superstar?</label>
+    <input id="pitcherSuperstar" name="pitcherSuperstar" type="checkbox" /><br><br>
+
+    <label for="isEasyBatting" title="Turns on easy batting mode, which increases contact zones on the bat">Easy Batting</label>
+    <input id="isEasyBatting" name="isEasyBatting" type="checkbox"/><!--label>(bool) 8089098a</label--><br><br>
+
+    <label for="handedness" title="Sets the batting stance of the batter">Handedness</label>
+    <select name="handedness" id="handedness">
+        <option value="0">(0) Righty</option>
+        <option value="1">(1) Lefty</option>
+    </select><!--label>(byte) 8089098b</label--><br><br>
+
+    <label for="batterX" title="The position of the batter when contact was made">Batter X Position</label>
+    <input id="batterX" name="batterX" type="text" value="0"/><!--label>(float) 8089095c</label--><br><br>
+    <input id="batterX2" name="batterX2" type="range" step=0.01 value="0" min="-0.6499999761581421" max="0.550000011920929"/>
+    <output id="posXOutput">0</output>
+
+    <label for="ballX" title="The position of the ball when contact was made">Ball X Position</label>
+    <input id="ballX" name="ballX" type="text" value="0"/><!--label>(float) 80890934</label-->
+
+    <label for="ballXMin">Lower Bound</label>
+    <input id="ballXMin" name="ballXMin" type="text" placeholder="Optional"/><!--label>(float) 8089095c</label-->
+
+    <label for="ballXMax">Upper Bound</label>
+    <input id="ballXMax" name="ballXMax" type="text" placeholder="Optional"/><!--label>(float) 8089095c</label--><br><br>
+
+    <label for="chemOnBase" title="The number of runners on base who have chemistry with the batter">Chemistry Links on Base</label>
+    <select id="chemOnBase" name="chemOnBase">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select><!--label>(byte) 808909ba</label--><br><br>
+
+    <label for="slapChargeStarBunt" title="The type of swing">Slap/Charge/Star/Bunt</label>
+    <select name="slapChargeStarBunt" id="slapChargeStarBunt">
+        <option value="0">(0) Slap</option>
+        <option value="1">(1) Charge</option>
+        <!-- <option value="2">(2) Star</option> -->
+        <!-- <option value="3">(3) Bunt</option> -->
+    </select><!--label>(byte) 8089099b</label--><br><br>
+
+    <label for="isStar" title="Was the hit a special star hit?">Is Star Hit?</label>
+    <input id="isStar" name="isStar" type="checkbox"/><!--label>(bool) 808909b1</label--><br><br>
+
+    <label for="pitchType" title="Sets the pitch type">Pitch Curve/Charge/ChangeUp</label>
+    <select name="pitchType" id="pitchType">
+        <option value="0">Curve</option>
+        <option value="1">Charge</option>
+        <option value="2">Perfect Charge</option>
+        <option value="3">Change Up</option>
+    </select><!--label>(byte) 80890b21, (byte) 80890b1f</label--><br><br>
+
+
+    <label for="chargeUp" title="If this is <=0, game treats charge hits like slaps.">Charge Up</label>
+    <input id="chargeUp" name="chargeUp" type="text" value="0"/><!--label>(float) 80890968</label--><br><br>
+
+    <label for="chargeDown">Charge Down</label>
+    <input id="chargeDown" name="chargeDown" type="text" value="0"/><!--label>(float) 8089096c</label--><br><br>
+
+    <label for="frameOfContact">Frame of Contact</label>
+    <select id="frameOfContact" name="frameOfContact">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select><!--label>(short) 80890976</label-->
+
+    <label for="contactFrameRange">Optional: Simulate Using a Range of Frames</label>
+    <select id="contactFrameRange" name="contactFrameRange">
+        <option value="0">Single Frame</option>
+        <option value="1">± 1 frame</option>
+        <option value="2">± 2 frames</option>
+        <option value="3">± 3 frames</option>
+        <option value="4">± 4 frames</option>
+        <option value="5">± 5 frames</option>
+        <option value="10">All Frames</option>
+    </select>
+
+    <br><br>
+
+
+    <label for="randomInt1">Random Int 1</label>
+    <input id="randomInt1" name="randomInt1" placeholder="Optional" type="text"/><!--label>(uint) 80892684</label--><br><br>
+
+    <label for="randomInt2">Random Int 2</label>
+    <input id="randomInt2" name="randomInt2" placeholder="Optional" type="text"/><!--label>(uint) 80892688</label--><br><br>
+
+    <label for="randomCounter">Random Counter</label>
+    <input id="randomCounter" name="randomCounter" placeholder="Optional" type="text"/><!--label>(ushort) 8089269C</label--><br><br>
+
+    <label for="stadiumID">Stadium</label>
+    <select id="stadiumID" name="stadiumID">
+        <option value=0>Mario Stadium</option>
+        <option value=1>Peach Garden</option>
+        <option value=2>Wario Palace</option>
+        <option value=3>Yoshi Park</option>
+        <option value=4>DK Jungle</option>
+        <option value=5>Bowser Castle</option>
+        <!--<option value=6>Toy Field</option> -->
+    </select><label> </label>
+
+    <label for="showNoteBlocks" title="Display blocks that can turn into note blocks on the horizontal map">Show Note Blocks:</label>
+    <input id="showNoteBlocks" name="showNoteBlocks" type="checkbox" /><br><br>
+
+    <label for="invisToNotePercent">Percent of time invisible blocks turn into note blocks</label>
+    <input id="invisToNotePercent" name="invisToNotePercent" type="text" value="50"/><label> </label><br><br>
+
+    <label for="numberOfSims">Number of Simulations</label>
+    <input id="numberOfSims" name="numberOfSims" type="text" value="250"/><label> </label><br><br>
+
+    <label for="simulationType">Simulation Type</label>
+    <select id="simulationType" name="simulationType">
+        <option value=0>Random</option>
+        <option value=1>Uniform</option>
+    </select><br><br>
+
+    <label>Input Stick</label><br>
+    <label for="inputUp">Up</label>
+    <input id="inputUp" name="inputUp" type="checkbox" />
+
+    <label for="inputDown">Down</label>
+    <input id="inputDown" name="inputDown" type="checkbox" />
+
+    <label for="inputLeft">Left</label>
+    <input id="inputLeft" name="inputLeft" type="checkbox" />
+
+    <label for="inputRight">Right</label>
+    <input id="inputRight" name="inputRight" type="checkbox" /><br><br>
+
+    <input id="submitData" type="submit" value="Calculate"/><br><br>
+    <input id="randomData" type="submit" value="Random Data"/><br><br>
+    <input id="randomHR" type="submit" value="Random Contact HR Calculator"/>Simulates random contact and outputs the HR% for each batter based on the above parameters<br><br>
+        </div>
+        <div class="output">
+<!-- <div class="chart"> -->
+<img id="ballImg" src="ball.png" hidden="true"><br>
+<img id="batImg" src="bat transparent.png" hidden="true"><br>
+<img id="batFlippedImg" src="bat transparent lefty.png" hidden="true"><br>
+<img id="scale0100" src="0 100 scale.png" hidden="true"><br>
+<img id="scale100200" src="100 200 scale.png" hidden="true"><br>
+<!-- <img id="batFlippedImg" src="bat transparent lefty.png" hidden="true"><br> -->
+
+<!-- <canvas id="scaleGraph" width="200" height="1600"></canvas><br> -->
+<!-- <canvas id="allBatsGraph" width="1200" height="24030"></canvas><br> -->
+            <div class="wrapper">
+                <div class="graphs">
+                    <canvas id="contactOutput" width="650", height="450"></canvas><br>
+                    <canvas id="verticalOutput" width="300", height="300" ></canvas><br>
+                    <canvas id="horizontalOutput" width="300", height="300"></canvas><br>
+                    <label>Red = current simulation; Blue =  previous simulation</label>
+                </div>
+                <div class="output">
+                    <pre id="outputText"></pre>
+                </div>
+                </div>
+    </div>
+</div>
+
+</body>
+</html>
