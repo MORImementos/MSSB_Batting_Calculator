@@ -793,7 +793,7 @@ function randomInputs() {
     BattingExtensions[BatterHitbox[batter_id].TrimmedBat][1],
     4
   );
-  document.getElementById("batterX").value = 0;
+  document.getElementById("batterX2").value = 0;
   randIndex(document.getElementById("handedness"));
   randIndex(document.getElementById("chemOnBase"));
   randIndex(document.getElementById("slapChargeStarBunt"));
@@ -863,7 +863,7 @@ function parseInputs() {
   readValues.batter_id = document.getElementById("batterID").value;
   readValues.batterStarsOn = document.getElementById("batterSuperstar").checked;
 
-  readValues.posX = parseFloat(document.getElementById("batterX").value);
+  readValues.posX = parseFloat(document.getElementById("batterX2").value);
   readValues.ballContact_X = parseFloat(document.getElementById("ballX").value);
 
   if (!isEmptyOrSpaces(document.getElementById("ballXMin").value)) {
@@ -2649,6 +2649,7 @@ function displayValues() {
   }
   Object.entr;
 }
+
 
 document.addEventListener("DOMContentLoaded", function (event) {
   horizontalCanvas = document.getElementById("horizontalOutput");
